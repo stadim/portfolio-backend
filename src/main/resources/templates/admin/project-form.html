@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавяне на Проект</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+
+<div class="max-w-2xl mx-auto px-4 py-10">
+    <div class="mb-8 border-b border-slate-800 pb-5">
+        <h1 class="text-3xl font-bold text-white">Добавяне на нов проект</h1>
+        <p class="text-slate-400 text-sm">Попълнете формата, за да го запишете в базата данни</p>
+    </div>
+
+    <form th:action="@{/admin/projects}" th:object="${project}" method="POST" class="space-y-6 bg-slate-850 p-6 rounded-xl border border-slate-800 shadow-lg">
+
+        <input type="hidden" th:field="*{id}">
+
+        <div>
+            <label for="title" class="block text-sm font-medium text-slate-300 mb-2">Заглавие на проекта</label>
+            <input type="text" th:field="*{title}" id="title" required
+                   class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                   placeholder="Напр. Онлайн Магазин със Spring Boot">
+        </div>
+
+        <div>
+            <label for="technologies" class="block text-sm font-medium text-slate-300 mb-2">Използвани технологии</label>
+            <input type="text" th:field="*{technologies}" id="technologies" required
+                   class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                   placeholder="Напр. Java, Spring Boot, PostgreSQL, Tailwind CSS">
+        </div>
+
+        <div>
+            <label for="githubUrl" class="block text-sm font-medium text-slate-300 mb-2">Линк към GitHub</label>
+            <input type="url" th:field="*{githubUrl}" id="githubUrl"
+                   class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                   placeholder="https://github.com/yourusername/project">
+        </div>
+
+        <div>
+            <label for="imageUrl" class="block text-sm font-medium text-slate-300 mb-2">Линк към картинка (URL)</label>
+            <input type="url" th:field="*{imageUrl}" id="imageUrl"
+                   class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                   placeholder="https://images.unsplash.com/...">
+        </div>
+
+        <div>
+            <label for="description" class="block text-sm font-medium text-slate-300 mb-2">Описание на проекта</label>
+            <textarea th:field="*{description}" id="description" rows="5"
+                      class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                      placeholder="Опишете накратко какво прави проекта и какви архитектурни решения сте взели..."></textarea>
+        </div>
+
+        <div class="flex justify-end space-x-4 border-t border-slate-800 pt-4">
+            <a th:href="@{/admin}" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white transition">
+                Отказ
+            </a>
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-lg shadow-indigo-600/20 transition">
+                Запази Проекта
+            </button>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

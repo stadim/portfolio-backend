@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${title}">Моето Портфолио</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+
+<nav class="max-w-5xl mx-auto px-4 py-6 flex justify-between items-center">
+  <div class="text-xl font-bold text-indigo-400 tracking-wider">PORTFOLIO.</div>
+  <div class="space-x-6 text-sm font-medium">
+    <a href="#" class="hover:text-indigo-400 transition">Начало</a>
+    <a href="#" class="hover:text-indigo-400 transition">Проекти</a>
+    <a href="#" class="hover:text-indigo-400 transition">Контакти</a>
+  </div>
+</nav>
+
+<header class="max-w-5xl mx-auto px-4 py-20 flex flex-col items-center text-center">
+  <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-4">
+    Здравей, аз съм <span th:text="${name}" class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Име</span>
+  </h1>
+  <p class="text-xl text-slate-400 max-w-2xl mb-8">
+    Добре дошли в моето дигитално пространство. Аз съм Junior Java разработчик, фокусиран върху изграждането на чист, бърз и сигурен бекенд код със Spring Boot.
+  </p>
+  <div class="flex gap-4">
+    <a href="#" class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg font-semibold shadow-lg shadow-indigo-600/30 transition">Виж проектите ми</a>
+    <a href="#" class="border border-slate-700 hover:border-slate-500 px-6 py-3 rounded-lg font-semibold transition">Свържи се с мен</a>
+  </div>
+</header>
+
+<section class="max-w-5xl mx-auto px-4 py-16">
+  <h2 class="text-3xl font-bold mb-10 text-center md:text-left border-b border-slate-800 pb-4">
+    Моите Проекти
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+    <div th:each="project : ${projects}" class="bg-slate-850 border border-slate-800 rounded-xl overflow-hidden shadow-lg hover:border-indigo-500/50 transition duration-300">
+
+      <img th:src="${project.imageUrl}" alt="Project Image" class="w-full h-48 object-cover">
+
+      <div class="p-6">
+        <h3 th:text="${project.title}" class="text-2xl font-bold text-white mb-2">Заглавие на проект</h3>
+
+        <p th:text="${project.description}" class="text-slate-400 text-sm mb-4 line-clamp-3">
+          Кратко описание на проекта, взето от базата данни.
+        </p>
+
+        <div class="mb-6 flex flex-wrap gap-2">
+                        <span th:text="${project.technologies}" class="text-xs font-semibold bg-indigo-950/50 text-indigo-300 px-3 py-1 rounded-full border border-indigo-900/50">
+                            Java, Spring Boot
+                        </span>
+        </div>
+
+        <a th:href="${project.githubUrl}" target="_blank" class="inline-flex items-center text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition">
+          Виж кода в GitHub &rarr;
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
