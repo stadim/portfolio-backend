@@ -12,6 +12,19 @@
     <div class="flex justify-between items-center mb-8 border-b border-slate-800 pb-5">
         <div>
             <h1 class="text-3xl font-bold text-white">Административен панел</h1>
+            <p class="text-slate-400 text-sm">Добре дошли обратно! Тук управлявате вашите проекти и съобщения.</p>
+        </div>
+
+        <form th:action="@{/admin/logout}" method="POST">
+            <button type="submit" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-4 py-2 rounded-lg text-sm font-medium border border-slate-750 transition">
+                Изход
+            </button>
+        </form>
+    </div>
+
+    <div class="flex justify-between items-center mb-8 border-b border-slate-800 pb-5">
+        <div>
+            <h1 class="text-3xl font-bold text-white">Административен панел</h1>
             <p class="text-slate-400 text-sm">Управление на проектите в портфолиото</p>
         </div>
         <a th:href="@{/admin/projects/new}" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg font-medium text-sm transition">
@@ -45,6 +58,38 @@
                         Изтрий
                     </a>
                 </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-12 mb-5">
+        <h2 class="text-2xl font-bold text-white">Входящи съобщения</h2>
+        <p class="text-slate-400 text-sm">Съобщения, изпратени от контактната форма на сайта</p>
+    </div>
+
+    <div class="bg-slate-850 border border-slate-800 rounded-xl overflow-hidden shadow-lg mb-10">
+        <table class="w-full text-left border-collapse">
+            <thead>
+            <tr class="bg-slate-800/50 text-slate-400 text-xs font-semibold uppercase tracking-wider border-b border-slate-800">
+                <th class="p-4">От кого</th>
+                <th class="p-4">Имейл</th>
+                <th class="p-4">Тема</th>
+                <th class="p-4">Съобщение</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800 text-sm">
+            <tr th:if="${#lists.isEmpty(messages)}">
+                <td colspan="4" class="p-8 text-center text-slate-500 italic">
+                    Все още няма получени съобщения.
+                </td>
+            </tr>
+
+            <tr th:each="msg : ${messages}" class="hover:bg-slate-800/30 transition">
+                <td th:text="${msg.name}" class="p-4 font-semibold text-white">Име</td>
+                <td th:text="${msg.email}" class="p-4 text-indigo-400 font-mono">email@example.com</td>
+                <td th:text="${msg.subject}" class="p-4 text-slate-300 font-medium">Тема</td>
+                <td th:text="${msg.text}" class="p-4 text-slate-400 max-w-xs truncate" th:title="${msg.text}">Текст на съобщението...</td>
             </tr>
             </tbody>
         </table>

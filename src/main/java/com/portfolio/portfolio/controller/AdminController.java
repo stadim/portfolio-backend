@@ -2,6 +2,7 @@ package com.portfolio.portfolio.controller;
 
 
 import com.portfolio.portfolio.model.Project;
+import com.portfolio.portfolio.repository.MessageRepository;
 import com.portfolio.portfolio.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,12 +16,20 @@ public class AdminController {
     @Autowired
     private ProjectRepository projectRepository;
 
+    @Autowired
+    private MessageRepository messageRepository; // 1. Инжектираме репозиторито за съобщения
+
     // 1. Показване на списъка с проекти (Dashboard)
     // Достъпно на: http://localhost:8080/admin
     @GetMapping
     public String dashboard(Model model) {
+        // Подаваме проектите
         model.addAttribute("projects", projectRepository.findAll());
-        return "admin/dashboard"; // Търси папка admin и файл dashboard.html вътре
+
+        // 2. Вземаме всички съобщения от PostgreSQL и ги подаваме на HTML-а
+        model.addAttribute("messages", messageRepository.findAll());
+
+        return "admin/dashboard";
     }
 
     // 2. Показване на формата за добавяне на нов проект
