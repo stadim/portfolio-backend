@@ -1,10 +1,10 @@
-# Първа стъпка: Компилиране на приложението
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+# Първа стъпка: Компилиране на приложението с Java 21
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Втора стъпка: Стартиране на готовия .jar файл
-FROM eclipse-temurin:17-jdk-jammy
+# Втора стъпка: Стартиране на готовия .jar файл с Java 21 Runtime
+FROM eclipse-temurin:21-jdk-jammy
 COPY --from=build /target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app.jar"]
